@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.democome.smart.mapper.UserMapper">
+
+	<sql id="userColumns">
+		u.id AS user_id,
+		u.name AS user_name,
+		u.account AS user_account
+	</sql>
+	
+	<resultMap
+		id="userResult"
+		type="User">
+	
+	    <id property="id" column="user_id"/>
+	    <result property="name" column="user_name"/>
+	    <result property="account" column="user_account"/>
+	    	    
+	</resultMap>
+	
+	<select id="selectUserById" resultMap="userResult">
+		SELECT
+			<include refid="userColumns"/>
+		FROM
+			 user u
+		WHERE id = #{id, javaType=int, jdbcType=INTEGER}
+			 
+	</select>
+
+	<select id="selectAllUsers" resultMap="userResult" >
+		SELECT
+			<include refid="userColumns"/>
+		FROM
+			user u
+	</select>
+
+	<insert id="insertUser" parameterType="User" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO user (
+			id,
+			name,
+			account
+		)VALUES (
+			#{id, javaType=int, jdbcType=INTEGER},
+			#{name, javaType=string, jdbcType=CHAR},
+			#{account, javaType=string, jdbcType=CHAR}
+		);
+	</insert>
+
+	<update id="updateUser" parameterType="User">
+		UPDATE
+			user
+		<set>
+			<if test="name != null">
+				name = #{name, javaType=string, jdbcType=CHAR}   
+			</if>
+		</set>
+		
+		WHERE
+			id = #{id, javaType=string, jdbcType=CHAR}
+	</update>
+
+	<delete id="deleteUser" parameterType="map">
+		DELETE FROM
+			user
+	    WHERE 
+	       id = #{id, javaType=int, jdbcType=INTEGER}
+	</delete>
+
+</mapper>
