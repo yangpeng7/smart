@@ -6,39 +6,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.democome.smart.mapper.UserMapper;
+import com.democome.smart.model.filter.user.UserFilter;
 import com.democome.smart.model.user.User;
 import com.democome.smart.service.user.api.IUserService;
 
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService {
 
 	@Autowired
-    private UserMapper mapper;
+	private UserMapper mapper;
 
-    @Override
-    public List<User> getAllUsers() {
-        return mapper.selectAllUsers();
-    }
+	@Override
+	public List<User> getAllUsers() {
+		return mapper.selectAllUsers();
+	}
 
-    @Override
-    public User getUser(Integer id) {
-        return mapper.selectUserById(id);
-    }
+	@Override
+	public List<User> searchUsersByFilter(UserFilter filter) {
+		return mapper.selectUsersByFilter(filter);
+	}
 
-    @Override
-    public void createUser(User user) {
-        mapper.insertUser(user);
-    }
+	@Override
+	public User getUser(Integer id) {
+		return mapper.selectUserById(id);
+	}
 
-    @Override
-    public void updateUser(User user) {
-        mapper.updateUser(user);
-    }
+	@Override
+	public void createUser(User user) {
+		mapper.insertUser(user);
+	}
 
-    @Override
-    public void deleteUser(Integer id) {
-        mapper.deleteUser(id);
-    }
+	@Override
+	public void updateUser(User user) {
+		mapper.updateUser(user);
+	}
 
+	@Override
+	public void deleteUser(Integer id) {
+		mapper.deleteUser(id);
+	}
 
 }

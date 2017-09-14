@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.democome.smart.model.filter.user.UserFilter;
 import com.democome.smart.model.user.User;
 import com.democome.smart.service.user.UserService;
 import com.github.pagehelper.PageHelper;
@@ -39,6 +40,25 @@ public class UserController {
 			PageHelper.startPage(page, pageSize);
 		}
 		List<User> users = service.getAllUsers();
+		PageInfo<User> pageInfo = new PageInfo<User>(users);
+		SearchUserResponse response = new SearchUserResponse();
+		response.setUsers(users);
+		response.setTotalNumber(pageInfo.getSize());
+
+		return response;
+	}
+
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public SearchUserResponse searchUser(@RequestBody SearchUserRequest request) {
+
+		if (request.getPageNumber() != null && request.getPageSize() != null) {
+			PageHelper.startPage(request.getPageNumber(), request.getPageSize());
+		}
+
+		UserFilter userFilter = new UserFilter();
+		userFilter.setName(request.getName());
+		List<User> users = service.searchUsersByFilter(userFilter);
+
 		PageInfo<User> pageInfo = new PageInfo<User>(users);
 		SearchUserResponse response = new SearchUserResponse();
 		response.setUsers(users);

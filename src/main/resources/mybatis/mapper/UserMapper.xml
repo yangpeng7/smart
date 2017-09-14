@@ -8,6 +8,12 @@
 		u.account AS user_account
 	</sql>
 	
+	<sql id="userFilter" >
+		<if test="filter.name != null">
+			AND u.name = #{filter.name, javaType=string, jdbcType=CHAR}
+		</if>
+	</sql>
+	
 	<resultMap
 		id="userResult"
 		type="User">
@@ -31,7 +37,17 @@
 		SELECT
 			<include refid="userColumns"/>
 		FROM
+			user u	
+	</select>
+	
+	<select id="selectUsersByFilter" resultMap="userResult" >
+		SELECT
+			<include refid="userColumns"/>
+		FROM
 			user u
+		<where>
+			<include refid="userFilter" />
+		</where>
 	</select>
 
 	<insert id="insertUser" parameterType="User" useGeneratedKeys="true"

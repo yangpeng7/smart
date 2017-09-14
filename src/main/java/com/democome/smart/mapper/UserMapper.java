@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.democome.smart.model.filter.user.UserFilter;
 import com.democome.smart.model.user.User;
 
 public interface UserMapper {
 
 	public List<User> selectAllUsers();
+
+	public List<User> selectUsersByFilter(@Param("filter") UserFilter filter);
 
 	public User selectUserById(@Param("id") Integer id);
 
