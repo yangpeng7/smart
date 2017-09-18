@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.democome.smart.mapper.ProjectMapper">
+   
+	<sql id="projectColumns">
+		p.id AS project_id,
+		p.title AS project_title,
+		p.picture_url AS project_picture_url,
+		p.description AS project_description,
+		p.download_url AS project_download_url,
+		p.tag AS project_tag,
+		p.language AS project_language,
+		p.create_time AS project_create_time,
+		p.update_time AS project_update_time,
+		p.user_id AS project_user_id
+	</sql>
+	
+	<sql id="projectFilter" >
+		<if test="filter.keyword != null">
+				(p.title LIKE #{filter.keyword, javaType=string, jdbcType=CHAR}
+				OR p.description LIKE #{filter.keyword, javaType=string, jdbcType=CHAR})
+		</if>
+	</sql>
+	
+	<resultMap
+		id="projectResult"
+		type="Project">
+	
+	    <id property="id" column="project_id"/>
+	    <result property="title" column="project_title"/>
+	    <result property="pictureUrl" column="project_picture_url"/>
+	    <result property="description" column="project_description"/>
+	    <result property="downloadUrl" column="project_download_url"/>
+	    <result property="tag" column="project_tag"/>
+	    <result property="language" column="project_language"/>
+	    <result property="createTime" column="project_create_time"/>
+	    <result property="updateTime" column="project_update_time"/>
+	    <result property="userId" column="project_user_id"/>
+	    	    
+	</resultMap>
+	
+	<select id="selectProjectById" resultMap="projectResult">
+		SELECT
+			<include refid="projectColumns"/>
+		FROM
+			 project p
+		WHERE id = #{id, javaType=int, jdbcType=INTEGER}
+			 
+	</select>
+	
+	<select id="selectProjectByFilter" resultMap="projectResult" >
+		SELECT
+			<include refid="projectColumns"/>
+		FROM
+			 project p
+		<where>
+			<include refid="projectFilter" />
+		</where>
+	</select>
+
+	<insert id="insertProject" parameterType="Project" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO project (
+			id,
+			title,
+			picture_url,
+			description,
+			download_url,
+			tag,
+			language,
+			create_time,
+			update_time,
+			user_id
+		)VALUES (
+			#{id, javaType=int, jdbcType=INTEGER},
+			#{title, javaType=string, jdbcType=CHAR},
+			#{pictureUrl, javaType=string, jdbcType=CHAR},
+			#{description, javaType=string, jdbcType=CHAR},
+			#{downloadUrl, javaType=string, jdbcType=CHAR},
+			#{tag, javaType=string, jdbcType=CHAR},
+			#{language, javaType=string, jdbcType=CHAR},
+			#{createTime, javaType=date, jdbcType=TIMESTAMP},
+			#{updateTime, javaType=date, jdbcType=TIMESTAMP},
+			#{userId, javaType=string, jdbcType=CHAR}
+		);
+	</insert>
+
+ 	<update id="updateProject" parameterType="Project">
+		UPDATE
+			project
+		<set>
+			<if test="title != null">
+				title = #{title, javaType=string, jdbcType=CHAR}   
+			</if>
+		</set>
+		
+		WHERE
+			id = #{id, javaType=string, jdbcType=CHAR}
+	</update>
+
+	<delete id="deleteProject" parameterType="map">
+		DELETE FROM
+			project
+	    WHERE 
+	       id = #{id, javaType=int, jdbcType=INTEGER}
+	</delete>
+
+</mapper>

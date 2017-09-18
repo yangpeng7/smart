@@ -20,7 +20,7 @@ CREATE TABLE `project` (
     `description` VARCHAR(128) NOT NULL,
     `download_url` VARCHAR(256) DEFAULT NULL,
     `tag` VARCHAR(32) NOT NULL,
-    `languare` VARCHAR(128) NOT NULL,
+    `language` VARCHAR(128) NOT NULL,
     `create_time` DATETIME NOT NULL,
     `update_time` DATETIME NOT NULL,
     `user_id` INT(11) NOT NULL,
