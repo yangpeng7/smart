@@ -22,7 +22,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/home")
 	public String index(Model model, @RequestParam(defaultValue = "1") Integer pageNumber,
-			@RequestParam(defaultValue = "30") Integer pageSize) {
+			@RequestParam(defaultValue = "12") Integer pageSize) {
 
 		PageHelper.startPage(pageNumber, pageSize);
 
@@ -36,6 +36,15 @@ public class HomeController {
 		model.addAttribute("pageSize", pageInfo.getPageSize());
 		model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
 		model.addAttribute("totalPages", pageInfo.getPages());
+
+		if (pageNumber <= 5) {
+			model.addAttribute("beginPage", 1);
+			model.addAttribute("endPage", 5);
+		} else {
+			model.addAttribute("beginPage", pageNumber - 3);
+			model.addAttribute("endPage", pageNumber + 2);
+		}
+
 		model.addAttribute("isLastPage", pageInfo.isIsLastPage());
 		model.addAttribute("articles", pageInfo.getList());
 
