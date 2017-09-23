@@ -1567,7 +1567,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .footer-meta .footer-container {
 	width: 100%;
 	max-width: 960px;
-	height: 250px;
+	height: 80px;
 	margin: 0 auto;
 }
 

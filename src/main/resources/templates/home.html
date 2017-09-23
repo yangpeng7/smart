@@ -6,57 +6,14 @@
 <link th:href="@{../css/bootstrap-theme.min.css}" rel="stylesheet" />
 <link th:href="@{../customer/style.min.css}" rel="stylesheet" />
 <meta charset="UTF-8" />
-<title>Title</title>
+<title>代码来了</title>
 </head>
 
 
 <body>
 	<div id="wrapper">
 
-		<nav class="navbar navbar-inverse">
-			<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-						aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">代码来了</a>
-				</div>
-
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse"
-					id="bs-example-navbar-collapse-1">
-
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">全部 <span class="sr-only">(current)</span></a></li>
-						<li class="active"><a href="#">Android <span
-								class="sr-only">(current)</span></a></li>
-						<li class="active"><a href="#">iOS <span class="sr-only">(current)</span></a></li>
-						<li class="active"><a href="#">前端 <span class="sr-only">(current)</span></a></li>
-						<li class="active"><a href="#">后端 <span class="sr-only">(current)</span></a></li>
-					</ul>
-
-					<form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="请输入关键字.." />
-							<button type="button" class="btn btn-default">搜索</button>
-						</div>
-					</form>
-
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">注册</a></li>
-						<li><a href="#">登录</a></li>
-					</ul>
-				</div>
-				<!-- /.navbar-collapse -->
-			</div>
-			<!-- /.container-fluid -->
-		</nav>
-
+		<div th:replace="/header::header"></div>
 
 		<div class="main-content index-page clearfix">
 			<div class="post-lists">
@@ -105,8 +62,9 @@
 			</ul>
 		</nav>
 
-
-
 	</div>
+
+	<div th:replace="/footer::footer"></div>
+
 </body>
 </html>

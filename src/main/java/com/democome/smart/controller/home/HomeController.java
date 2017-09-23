@@ -22,7 +22,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/home")
 	public String index(Model model, @RequestParam(defaultValue = "1") Integer pageNumber,
-			@RequestParam(defaultValue = "12") Integer pageSize) {
+			@RequestParam(defaultValue = "21") Integer pageSize) {
 
 		PageHelper.startPage(pageNumber, pageSize);
 
