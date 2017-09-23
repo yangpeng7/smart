@@ -30,6 +30,7 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
+
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="#">全部 <span class="sr-only">(current)</span></a></li>
 						<li class="active"><a href="#">Android <span
@@ -38,6 +39,13 @@
 						<li class="active"><a href="#">前端 <span class="sr-only">(current)</span></a></li>
 						<li class="active"><a href="#">后端 <span class="sr-only">(current)</span></a></li>
 					</ul>
+
+					<form class="navbar-form navbar-left" role="search">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="请输入关键字.." />
+							<button type="button" class="btn btn-default">搜索</button>
+						</div>
+					</form>
 
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#">注册</a></li>
@@ -60,14 +68,10 @@
 							<div class="item-slant"></div>
 							<div class="item-label">
 								<div class="item-title">
-									<a th:text="${article.title}"></a>
+									<a th:text="${article.description}"></a>
 								</div>
 								<div class="item-meta clearfix">
-									<div class="item-meta-cat" th:utext="${article.language}">
-									</div>
-
-
-
+									<span class="label label-success" th:text="${article.language}"></span>
 								</div>
 							</div>
 						</div>
