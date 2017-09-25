@@ -56,7 +56,7 @@ public class UserController {
 		}
 
 		UserFilter userFilter = new UserFilter();
-		userFilter.setName(request.getName());
+		userFilter.setUsername(request.getUsername());
 		List<User> users = service.searchUsersByFilter(userFilter);
 
 		PageInfo<User> pageInfo = new PageInfo<User>(users);
@@ -78,8 +78,8 @@ public class UserController {
 	public void addUser(@RequestBody CreateUserRequest request) {
 
 		User user = new User();
-		user.setName(request.getName());
-		user.setAccount(request.getAccount());
+		user.setUsername(request.getUsername());
+		user.setPassword(request.getPassword());
 
 		service.createUser(user);
 	}

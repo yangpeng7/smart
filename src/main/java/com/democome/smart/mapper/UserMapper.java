@@ -15,6 +15,8 @@ public interface UserMapper {
 
 	public User selectUserById(@Param("id") Integer id);
 
+	public User selectUserByUsername(@Param("username") String username);
+
 	public void insertUser(User user);
 
 	public void updateUser(User user);

@@ -4,13 +4,13 @@
 
 	<sql id="userColumns">
 		u.id AS user_id,
-		u.name AS user_name,
-		u.account AS user_account
+		u.username AS user_username,
+		u.password AS user_password
 	</sql>
 	
 	<sql id="userFilter" >
-		<if test="filter.name != null">
-			AND u.name = #{filter.name, javaType=string, jdbcType=CHAR}
+		<if test="filter.username != null">
+			AND u.username = #{filter.username, javaType=string, jdbcType=CHAR}
 		</if>
 	</sql>
 	
@@ -19,8 +19,8 @@
 		type="User">
 	
 	    <id property="id" column="user_id"/>
-	    <result property="name" column="user_name"/>
-	    <result property="account" column="user_account"/>
+	    <result property="username" column="user_username"/>
+	    <result property="password" column="user_password"/>
 	    	    
 	</resultMap>
 	
@@ -30,6 +30,15 @@
 		FROM
 			 user u
 		WHERE id = #{id, javaType=int, jdbcType=INTEGER}
+			 
+	</select>
+
+	<select id="selectUserByUsername" resultMap="userResult">
+		SELECT
+			<include refid="userColumns"/>
+		FROM
+			 user u
+		WHERE username = #{username, javaType=string, jdbcType=CHAR}
 			 
 	</select>
 
@@ -54,12 +63,12 @@
 		keyProperty="id">
 		INSERT INTO user (
 			id,
-			name,
-			account
+			username,
+			password
 		)VALUES (
 			#{id, javaType=int, jdbcType=INTEGER},
-			#{name, javaType=string, jdbcType=CHAR},
-			#{account, javaType=string, jdbcType=CHAR}
+			#{username, javaType=string, jdbcType=CHAR},
+			#{password, javaType=string, jdbcType=CHAR}
 		);
 	</insert>
 
@@ -67,8 +76,8 @@
 		UPDATE
 			user
 		<set>
-			<if test="name != null">
-				name = #{name, javaType=string, jdbcType=CHAR}   
+			<if test="username != null">
+				username = #{username, javaType=string, jdbcType=CHAR}   
 			</if>
 		</set>
 		

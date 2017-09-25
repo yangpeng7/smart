@@ -2,23 +2,23 @@ package com.democome.smart.controller.user;
 
 public class CreateUserRequest {
 
-	private String name;
-	private String account;
+	private String username;
+	private String password;
 
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getAccount() {
-		return account;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }
