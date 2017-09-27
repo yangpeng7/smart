@@ -5,8 +5,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,11 +28,12 @@ public class UserController {
 	@RequestMapping("/all")
 	public List<User> getUser() {
 
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-		String username = userDetails.getUsername();
-	
-		logger.info("username: " + username);
+		// UserDetails userDetails = (UserDetails)
+		// SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		//
+		// String username = userDetails.getUsername();
+		//
+		// logger.info("username: " + username);
 
 		List<User> list = service.getAllUsers();
 		logger.info(list.toString());
@@ -97,5 +96,4 @@ public class UserController {
 
 		service.deleteUser(id);
 	}
-
 }

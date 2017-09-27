@@ -16,6 +16,7 @@
 
 		<div th:replace="/header::header"></div>
 
+		<div sec:authorize="isAuthenticated()"></div>
 		<h1 th:inline="text">您好， [[${#httpServletRequest.remoteUser}]]!</h1>
 
 		<div class="main-content index-page clearfix">
