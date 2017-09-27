@@ -1,6 +1,9 @@
 package com.democome.smart.controller.home;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,6 +58,32 @@ public class HomeController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 		return "login";
+	}
+
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test(Model model) {
+
+		StringBuilder result = new StringBuilder("");
+
+		ClassLoader classLoader = getClass().getClassLoader();
+		File file = new File(classLoader.getResource("Article.md").getFile());
+
+		try (Scanner scanner = new Scanner(file)) {
+
+			while (scanner.hasNextLine()) {
+				String line = scanner.nextLine();
+				result.append(line).append("\n");
+			}
+
+			scanner.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		model.addAttribute("article", result.toString());
+
+		return "article";
 	}
 
 }
