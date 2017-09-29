@@ -5,6 +5,7 @@
 <head>
 
 <link th:href="@{../css/bootstrap.min.css}" rel="stylesheet" />
+<link th:href="@{../customer/style.min.css}" rel="stylesheet" />
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script th:src="@{../js/marked.js}"></script>
 
@@ -17,7 +18,12 @@
 </head>
 <body>
 
+	<div th:replace="/header::header"></div>
+
 	<div id="article" th:attr="data=${article}"
 		style="width: 80%; margin: 0 auto"></div>
+
+	<div th:replace="/footer::footer"></div>
+	
 </body>
 </html>
