@@ -782,11 +782,18 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	background-color: #fff
 }
 
-.post-list-item-container .item-label .item-title a {
+.post-list-item-container .item-label .item-title span {
 	font-size: 17px;
 	line-height: 17px;
 	word-break: break-all;
 	color: #313131
+}
+
+.post-list-item-container .item-label .item-description span{
+	font-size: 15px;
+	line-height: 17px;
+	word-break: break-all;
+	color: #b3b3b3
 }
 
 .post-list-item-container .item-label .item-meta {

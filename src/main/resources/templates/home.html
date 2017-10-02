@@ -35,7 +35,10 @@
 							<div class="item-slant"></div>
 							<div class="item-label">
 								<div class="item-title">
-									<a th:text="${article.description}"></a>
+									<span th:text="${article.title}"></span>
+								</div>
+								<div class="item-description">
+									<span th:text="${article.description}"></span>
 								</div>
 								<div class="item-meta clearfix">
 									<span class="label label-success" th:text="${article.language}"></span>
