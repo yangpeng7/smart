@@ -15,30 +15,35 @@
 DROP TABLE IF EXISTS `project`;
 CREATE TABLE `project` (
     `id` INT(10) NOT NULL AUTO_INCREMENT,
+    `github_id` INT(10) NOT NULL,
     `title` VARCHAR(64) NOT NULL,
     `picture_url` VARCHAR(256) DEFAULT NULL,
     `description` VARCHAR(128) NOT NULL,
     `download_url` VARCHAR(256) DEFAULT NULL,
     `tag` VARCHAR(32) NOT NULL,
     `language` VARCHAR(128) NOT NULL,
+    `is_delete` TINYINT(4) DEFAULT NULL,
+  	`html_url` VARCHAR(256) DEFAULT NULL,
     `create_time` DATETIME NOT NULL,
     `update_time` DATETIME NOT NULL,
     `user_id` INT(11) NOT NULL,
     PRIMARY KEY (`id`),
+	UNIQUE KEY `uk_github_id` (`github_id`),
     CONSTRAINT `fk_project_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 )  ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
+
 
 -- -----------------------------------------------------
 -- Table `project_detail`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `project_detail`;
 CREATE TABLE `project_detail` (
-    `id` INT(10) NOT NULL AUTO_INCREMENT,
-    `description` TEXT NOT NULL,
-    `project_id` INT(11) NOT NULL,
-    PRIMARY KEY (`id`),
-    CONSTRAINT `fk_project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+    `github_id` INT(10) NOT NULL,
+    `readme` TEXT DEFAULT NULL,
+    PRIMARY KEY (`github_id`),
+    CONSTRAINT `fk_github_id` FOREIGN KEY (`github_id`) REFERENCES `project` (`github_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 )  ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
+
 
 -- -----------------------------------------------------
 -- Table `user`

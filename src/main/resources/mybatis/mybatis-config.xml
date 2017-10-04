@@ -10,6 +10,7 @@
 	<typeAliases>
 		<typeAlias alias="User" type="com.democome.smart.model.user.User"/>
 		<typeAlias alias="Project" type="com.democome.smart.model.project.Project"/>
+		<typeAlias alias="ProjectDetail" type="com.democome.smart.model.project.ProjectDetail"/>
 	</typeAliases>
 	
 	<plugins>

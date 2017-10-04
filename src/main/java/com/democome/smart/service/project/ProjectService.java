@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.democome.smart.mapper.ProjectMapper;
 import com.democome.smart.model.filter.project.ProjectFilter;
 import com.democome.smart.model.project.Project;
+import com.democome.smart.model.project.ProjectDetail;
 import com.democome.smart.service.project.api.IProjectService;
 
 @Service
@@ -44,6 +45,12 @@ public class ProjectService implements IProjectService {
 	public void deleteProjectr(Integer id) {
 
 		mapper.deleteProject(id);
+	}
+
+	@Override
+	public ProjectDetail getProjectDetail(Integer id) {
+
+		return mapper.selectProjectDetailByGithubId(id);
 	}
 
 }

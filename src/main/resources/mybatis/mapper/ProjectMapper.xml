@@ -4,15 +4,23 @@
    
 	<sql id="projectColumns">
 		p.id AS project_id,
+		p.github_id AS project_github_id,
 		p.title AS project_title,
 		p.picture_url AS project_picture_url,
 		p.description AS project_description,
 		p.download_url AS project_download_url,
 		p.tag AS project_tag,
 		p.language AS project_language,
+		p.is_delete AS project_is_delete,
+		p.html_url AS project_html_url,
 		p.create_time AS project_create_time,
 		p.update_time AS project_update_time,
 		p.user_id AS project_user_id
+	</sql>
+	
+	<sql id="projectDetailColumns">
+		pd.github_id AS project_detail_github_id,
+		pd.readme AS project_detail_readme
 	</sql>
 	
 	<sql id="projectFilter" >
@@ -27,6 +35,7 @@
 		type="Project">
 	
 	    <id property="id" column="project_id"/>
+	    <result property="githubId" column="project_github_id"/>
 	    <result property="title" column="project_title"/>
 	    <result property="pictureUrl" column="project_picture_url"/>
 	    <result property="description" column="project_description"/>
@@ -37,6 +46,15 @@
 	    <result property="updateTime" column="project_update_time"/>
 	    <result property="userId" column="project_user_id"/>
 	    	    
+	</resultMap>
+	
+	<resultMap
+		id="projectDetailResult"
+		type="ProjectDetail">
+	
+	    <id property="githubId" column="project_detail_github_id"/>
+	    <result property="readme" column="project_detail_readme"/>
+	    	    	    
 	</resultMap>
 	
 	<select id="selectProjectById" resultMap="projectResult">
@@ -56,29 +74,45 @@
 		<where>
 			<include refid="projectFilter" />
 		</where>
+		ORDER BY p.description asc
+	</select>
+	
+	<select id="selectProjectDetailByGithubId" resultMap="projectDetailResult">
+		SELECT
+			<include refid="projectDetailColumns"/>
+		FROM
+			 project_detail pd
+		WHERE github_id = #{id, javaType=int, jdbcType=INTEGER}
+			 
 	</select>
 
 	<insert id="insertProject" parameterType="Project" useGeneratedKeys="true"
 		keyProperty="id">
 		INSERT INTO project (
 			id,
+			github_id,
 			title,
 			picture_url,
 			description,
 			download_url,
 			tag,
 			language,
+			is_delete,
+			html_url,
 			create_time,
 			update_time,
 			user_id
 		)VALUES (
 			#{id, javaType=int, jdbcType=INTEGER},
+			#{githubId, javaType=int, jdbcType=INTEGER},
 			#{title, javaType=string, jdbcType=CHAR},
 			#{pictureUrl, javaType=string, jdbcType=CHAR},
 			#{description, javaType=string, jdbcType=CHAR},
 			#{downloadUrl, javaType=string, jdbcType=CHAR},
 			#{tag, javaType=string, jdbcType=CHAR},
 			#{language, javaType=string, jdbcType=CHAR},
+			#{deleted, javaType=int, jdbcType=TINYINT},
+			#{htmlUrl, javaType=string, jdbcType=CHAR},
 			#{createTime, javaType=date, jdbcType=TIMESTAMP},
 			#{updateTime, javaType=date, jdbcType=TIMESTAMP},
 			#{userId, javaType=string, jdbcType=CHAR}

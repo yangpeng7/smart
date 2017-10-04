@@ -13,7 +13,7 @@
 <script>
     function projectClicked(value) {
 
-    	window.open("/test?param=" + value);
+    	window.open("/project/detail?id=" + value);
     }
 </script>
 
@@ -22,14 +22,11 @@
 
 		<div th:replace="/header::header"></div>
 
-		<div sec:authorize="isAuthenticated()"></div>
-		<h1 th:inline="text">您好， [[${#httpServletRequest.remoteUser}]]!</h1>
-
 		<div class="main-content index-page clearfix">
 			<div class="post-lists">
 				<div class="post-lists-body">
 					<div class="post-list-item" th:each="article: ${articles}">
-						<div class="post-list-item-container" th:onclick="'javascript:projectClicked(\'' + ${article.id} + '\');'">
+						<div class="post-list-item-container" th:onclick="'javascript:projectClicked(\'' + ${article.githubId} + '\');'">
 
 							<div class="item-slant reverse-slant &lt; bg-deepgrey"></div>
 							<div class="item-slant"></div>

@@ -8,6 +8,7 @@ public class Project implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int id;
+	private int githubId;
 	private String title;
 	private String pictureUrl;
 	private String description;
@@ -15,6 +16,8 @@ public class Project implements Serializable {
 	private String tag;
 	private String language;
 	private Date createTime;
+	private Boolean deleted;
+	private String htmlUrl;
 	private Date updateTime;
 	private int userId;
 
@@ -96,6 +99,30 @@ public class Project implements Serializable {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public int getGithubId() {
+		return githubId;
+	}
+
+	public void setGithubId(int githubId) {
+		this.githubId = githubId;
+	}
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
+	public String getHtmlUrl() {
+		return htmlUrl;
+	}
+
+	public void setHtmlUrl(String htmlUrl) {
+		this.htmlUrl = htmlUrl;
 	}
 
 }
