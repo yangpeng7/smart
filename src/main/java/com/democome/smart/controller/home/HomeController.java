@@ -54,6 +54,39 @@ public class HomeController {
 
 		return "home";
 	}
+	
+	@RequestMapping(value = "/search")
+	public String search(Model model,@RequestParam(defaultValue = "") String q, @RequestParam(defaultValue = "1") Integer pageNumber,
+			@RequestParam(defaultValue = "21") Integer pageSize) {
+
+		PageHelper.startPage(pageNumber, pageSize);
+
+		ProjectFilter filter = new ProjectFilter();
+		filter.setKeyword(q);
+
+		List<Project> projects = service.searchProjectByFilter(filter);
+
+		PageInfo<Project> pageInfo = new PageInfo<Project>(projects);
+
+		model.addAttribute("pageNum", pageInfo.getPageNum());
+		model.addAttribute("pageSize", pageInfo.getPageSize());
+		model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
+		model.addAttribute("totalPages", pageInfo.getPages());
+		model.addAttribute("q", q);
+
+		if (pageNumber <= 5) {
+			model.addAttribute("beginPage", 1);
+			model.addAttribute("endPage", 5);
+		} else {
+			model.addAttribute("beginPage", pageNumber - 3);
+			model.addAttribute("endPage", pageNumber + 2);
+		}
+
+		model.addAttribute("isLastPage", pageInfo.isIsLastPage());
+		model.addAttribute("articles", pageInfo.getList());
+
+		return "search";
+	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+<link th:href="@{../css/bootstrap.min.css}" rel="stylesheet" />
+<link th:href="@{../css/bootstrap-theme.min.css}" rel="stylesheet" />
+<link th:href="@{../customer/style.min.css}" rel="stylesheet" />
+<meta charset="UTF-8" />
+<title>代码来了</title>
+</head>
+
+<script>
+	function projectClicked(value) {
+
+		window.open("/project/detail?id=" + value);
+	}
+</script>
+
+<body>
+	<div id="wrapper">
+
+		<div th:replace="/header::header"></div>
+
+		<div class="main-content index-page clearfix">
+			<div class="post-lists">
+				<div class="post-lists-body">
+					<div class="search-post-list-item" th:each="article: ${articles}">
+						<div class="search-post-list-item-container"
+							th:onclick="'javascript:projectClicked(\'' + ${article.githubId} + '\');'">
+							<div class="item-meta clearfix">
+								<span class="label label-success" th:text="${article.language}"></span>
+							</div>
+							<div class="item-label">
+								<!-- <div class="item-title">
+									<span th:text="${article.title}"></span>
+								</div> -->
+								<div class="item-description">
+									<span th:text="${article.description}"></span>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<nav class="text-center">
+			<ul class="pagination">
+
+				<li><a href="">&laquo;</a></li>
+
+				<li><a th:if="${not isFirstPage}"
+					th:href="@{${'/search'}(pageNumber=${pageNum-1},pageSize=${pageSize},q=${q})}">上一页</a>
+					<a th:if="${isFirstPagee}" href="javascript:void(0);">上一页</a></li>
+
+				<li th:each="pageNo : ${#numbers.sequence(beginPage, endPage)}"><a
+					th:if="${pageNum eq pageNo}" href="javascript:void(0);"> <span
+						th:text="${pageNo}"> </span>
+				</a> <a th:if="${not (pageNum eq pageNo)}"
+					th:href="@{${'/search'}(pageNumber=${pageNo},size=${pageSize},q=${q})}">
+						<span th:text="${pageNo}"></span>
+				</a></li>
+				<li><a th:if="${not isLastPage}"
+					th:href="@{${'/search'}(pageNumber=${pageNum+1},size=${pageSize},q=${q})}">下一页</a>
+					<a th:if="${isLastPage}" href="javascript:void(0);">下一页</a></li>
+
+				<li><a href="#">&raquo;</a></li>
+			</ul>
+		</nav>
+
+	</div>
+
+	<div th:replace="/footer::footer"></div>
+
+</body>
+</html>

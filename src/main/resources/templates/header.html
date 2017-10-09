@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="header">
 
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script>
+	function check(str) {
+		
+		var s = $("#keywork").val()
+		window.open("/search?q=" + s);
+	}
+</script>
+
 <body>
 
 	<nav class="navbar navbar-inverse">
@@ -28,13 +39,15 @@
 					<li class="active"><a href="#">iOS <span class="sr-only">(current)</span></a></li>
 					<li class="active"><a href="#">前端 <span class="sr-only">(current)</span></a></li>
 					<li class="active"><a href="#">后端 <span class="sr-only">(current)</span></a></li>
-					<li class="active"><a href="#">springboot 实战<span class="sr-only">(current)</span></a></li>
+					<li class="active"><a href="#">springboot 实战<span
+							class="sr-only">(current)</span></a></li>
 				</ul>
 
 				<form class="navbar-form navbar-left" role="search">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="请输入关键字.." />
-						<button type="button" class="btn btn-default">搜索</button>
+						<input id="keywork" type="text" class="form-control" placeholder="请输入关键字.."/>
+						<button type="button" class="btn btn-default"
+							th:onclick="'javascript:check('+${keywork}+')'">搜索</button>
 					</div>
 				</form>
 
