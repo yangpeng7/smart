@@ -688,7 +688,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .post-lists {
 	position: relative;
 	display: block;
-	overflow: hidden
+	/* overflow: hidden */
 }
 
 .post-lists-body {
@@ -709,6 +709,10 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	height: auto;
 	padding: 15px;
 	align-items: center;
+	margin:0px 0px 0px 0px;
+	/* border-width:1px; 
+	border-style:solid;  */
+	border-bottom:thin solid #cacaca;
 }
 
 .search-post-list-item-container {
@@ -718,14 +722,16 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	padding: 0;
 	border-radius: 3px;
 	background-color: #fff;
-	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, .04);
-	box-shadow: 0 1px 4px rgba(0, 0, 0, .04);
+	/* -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, .04);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .04); */
 	border-radius: 3px;
 }
 
 .search-post-list-item-container .item-label {
 	position: relative;
-	height: 100px;
+	min-height:50px; 
+	height:auto!important; 
+	height:50px;
 	padding: 15px 20px 15px;
 	background-color: #fff;
 	border: 3px;
